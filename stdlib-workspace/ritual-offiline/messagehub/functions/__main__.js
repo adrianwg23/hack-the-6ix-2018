@@ -22,8 +22,22 @@ firebase.initializeApp({
  */
 
 module.exports = async (sender = '', receiver = '', message = '_', createdDatetime = '', context) => {
-  // Try to find a handler for the message, default to __notfound__
+  // Break down the message to the command_message
+  let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+  console.log(parsedMessage);
+
+
+  // Find which handler to route to
+
+
+
   let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
+  // console.log(handler);
+  // let command_message = false;
+  //
+  // if (handler.charAt(0) == '#') {
+  //   command_message = true;
+  // }
 
 
 
@@ -32,17 +46,17 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   // let value = await ref.once("value", snapshot => {
   //   console.log(snapshot.val());
   // });
-
-
-
-  let response = await fetch('http://api.open-notify.org/iss-now.json')
-    .then(resp => {
-      if (resp.status >= 400) {
-        throw new Error('Bad response from server');
-      }
-      return resp.json();
-    });
-  console.log(response);
+  //
+  //
+  //
+  // let response = await fetch('http://api.open-notify.org/iss-now.json')
+  //   .then(resp => {
+  //     if (resp.status >= 400) {
+  //       throw new Error('Bad response from server');
+  //     }
+  //     return resp.json();
+  //   });
+  // console.log(response);
 
 
   try {
