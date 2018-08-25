@@ -27,19 +27,24 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   console.log(parsedMessage);
 
 
-  // Send the first <command> as handler
-  // let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
-  let handler = parsedMessage[0];
-  console.log(handler);
+  // Find which handler to route to
 
-  // let db = firebase.database();
-  // let ref = db.ref("switch");
-  // let value = await ref.once("value", snapshot => {
-  //   console.log(snapshot.val());
-  // });
+
+
+  let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
+  // console.log(handler);
+  // let command_message = false;
   //
-  //
-  //
+  // if (handler.charAt(0) == '#') {
+  //   command_message = true;
+  // }
+
+
+  firebase.database().ref('restaurants').set({
+    restaurant_name: "new restaurant",
+    location: "markham"
+  });
+
   // let response = await fetch('http://api.open-notify.org/iss-now.json')
   //   .then(resp => {
   //     if (resp.status >= 400) {
