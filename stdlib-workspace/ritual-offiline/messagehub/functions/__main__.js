@@ -27,19 +27,10 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   console.log(parsedMessage);
 
 
-  // Find which handler to route to
-
-
-
-  let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
-  // console.log(handler);
-  // let command_message = false;
-  //
-  // if (handler.charAt(0) == '#') {
-  //   command_message = true;
-  // }
-
-
+  // Send the first <command> as handler
+  // let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
+  let handler = parsedMessage[0];
+  console.log(handler);
 
   // let db = firebase.database();
   // let ref = db.ref("switch");

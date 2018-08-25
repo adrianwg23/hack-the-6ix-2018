@@ -16,6 +16,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
     sender,
     `This is the MORE handler for your MessageBird SMS handler on StdLib` +
       `\n\n` +
-      `You can customize its behavior in /functions/messaging/more.js`
+      `You can customize its behavior in /functions/messaging/more.js ${message}`
   )
 }
