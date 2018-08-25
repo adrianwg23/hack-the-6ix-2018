@@ -26,23 +26,21 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
 
 
-
-  // let db = firebase.database();
-  // let ref = db.ref("switch");
-  // let value = await ref.once("value", snapshot => {
-  //   console.log(snapshot.val());
-  // });
+  firebase.database().ref('restaurants').set({
+    restaurant_name: "new restaurant",
+    location: "markham"
+  });
 
 
 
-  let response = await fetch('http://api.open-notify.org/iss-now.json')
-    .then(resp => {
-      if (resp.status >= 400) {
-        throw new Error('Bad response from server');
-      }
-      return resp.json();
-    });
-  console.log(response);
+  // let response = await fetch('http://api.open-notify.org/iss-now.json')
+  //   .then(resp => {
+  //     if (resp.status >= 400) {
+  //       throw new Error('Bad response from server');
+  //     }
+  //     return resp.json();
+  //   });
+  // console.log(response);
 
 
   try {
