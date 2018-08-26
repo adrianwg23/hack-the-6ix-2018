@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "121740967307",
+    "firebase_url": "https://hack-the-6ix-201-1535217409242.firebaseio.com",
+    "project_id": "hack-the-6ix-201-1535217409242",
+    "storage_bucket": "hack-the-6ix-201-1535217409242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121740967307:android:eb2e4d4a36701c21",
+        "android_client_info": {
+          "package_name": "com.example.adrianwong.yum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121740967307-n138kk586r4sevdmd8bmqeuge2h6mvpn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adrianwong.yum",
+            "certificate_hash": "11e0f6c422bbc807e53cd94b1b36a9878900ea03"
+          }
+        },
+        {
+          "client_id": "121740967307-e5qiujsan8mmgrv84mverfcdtik0ud8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDppKTJHKxOhYXauPNgAv5MKiKEuDlHGZk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121740967307-e5qiujsan8mmgrv84mverfcdtik0ud8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
