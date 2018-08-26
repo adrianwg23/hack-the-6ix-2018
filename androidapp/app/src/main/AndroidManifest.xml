@@ -22,11 +22,11 @@
             android:name=".ui.base.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.menu.MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.order.OrderActivity"></activity>
+        <activity android:name=".ui.order.OrderActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.restaurant.RestaurantActivity" />
+        </activity>
     </application>
 
 </manifest>
