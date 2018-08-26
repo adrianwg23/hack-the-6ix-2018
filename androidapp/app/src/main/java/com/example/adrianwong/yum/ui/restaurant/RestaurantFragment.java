@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,12 @@ import android.view.ViewGroup;
 import com.example.adrianwong.yum.R;
 import com.example.adrianwong.yum.adapter.RestaurantAdapter;
 import com.example.adrianwong.yum.datamodel.RestaurantItem;
-import com.example.adrianwong.yum.ui.menu.MenuActivity;
-import com.example.adrianwong.yum.ui.menu.MenuFragment;
+import com.example.adrianwong.yum.ui.order.OrderActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,17 +49,21 @@ public class RestaurantFragment extends Fragment implements RestaurantContract.R
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.fragment_restaurant, container,false);
+        ButterKnife.bind(this, rootView);
+
         mRestaurantAdapter = new RestaurantAdapter();
         mRestaurantAdapter.setListInteractionListener(this);
+        initViews();
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_restaurant, container, false);
+        return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        mRestaurantPresenter.getList();
         mRestaurantPresenter.attachView(this);
     }
 
@@ -77,19 +82,19 @@ public class RestaurantFragment extends Fragment implements RestaurantContract.R
 
     @Override
     public void startMenuActivity() {
-        Intent intent = new Intent(getActivity(), MenuActivity.class);
+        Intent intent = new Intent(getActivity(), OrderActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void refreshRestaurantList(List<RestaurantItem> restaurantItems) {
-        mRestaurantAdapter.set
+        mRestaurantAdapter.setList(restaurantItems);
     }
 
     @Override
-    public void onListClick(int restaurantId) {
-        Intent intent = new Intent (getActivity(), MenuActivity.class);
-        intent.putExtra("restaurantId", restaurantId);
+    public void onListClick(String restaurantName) {
+        Intent intent = new Intent (getActivity(), OrderActivity.class);
+        intent.putExtra("restaurantName", restaurantName);
         startActivity(intent);
     }
 }

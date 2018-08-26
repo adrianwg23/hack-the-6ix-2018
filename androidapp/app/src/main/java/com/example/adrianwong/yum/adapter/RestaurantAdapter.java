@@ -3,6 +3,7 @@ package com.example.adrianwong.yum.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     public RestaurantAdapter() {
         mRestaurantList = new ArrayList<>();
-
+        mListInteractionListener = null;
     }
 
     @NonNull
@@ -50,10 +51,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         return mRestaurantList.size();
     }
 
-    public void setList(List<RestaurantItem>)
+    public void setList(List<RestaurantItem> restaurantItemList) {
+        mRestaurantList = restaurantItemList;
+        notifyDataSetChanged();
+    }
 
     public interface InteractionListener {
-        void onListClick(int restaurantId);
+        void onListClick(String restaurantName);
     }
 
     public void setListInteractionListener(InteractionListener interactionListener) {
@@ -67,12 +71,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public RestaurantItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (mListInteractionListener != null) {
-                mListInteractionListener.onListClick(getAdapterPosition());
+                String restaurantName = mRestaurantList.get(getAdapterPosition()).getRestaurantName();
+                mListInteractionListener.onListClick(restaurantName);
             }
         }
     }
