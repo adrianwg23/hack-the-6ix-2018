@@ -36,24 +36,6 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   console.log(parsedMessage);
   console.log(handler);
 
-
-  // // Test firebase
-  // let db = firebase.database()
-  // let ref = db.ref("restaurants/Pho Metro");
-  // await ref.once("value", (snapshot) => {
-  //   // console.log(snapshot.val());
-  // });
-
-  // let response = await fetch('http://api.open-notify.org/iss-now.json')
-  //   .then(resp => {
-  //     if (resp.status >= 400) {
-  //       throw new Error('Bad response from server');
-  //     }
-  //     return resp.json();
-  //   });
-  // console.log(response);
-
-
   try {
     result = await lib[`${context.service.identifier}.messaging.${handler}`]({
       sender: sender,

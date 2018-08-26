@@ -5,9 +5,6 @@ const send = require('../../helpers/send.js');
 const firebase = require("firebase-admin");
 const serviceAccount = require("../../serviceAccountKey.json");
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-
 let db = null;
 
 /**
@@ -19,32 +16,31 @@ let db = null;
  * @param {string} createdDatetime Datetime when the SMS was sent
  * @returns {any}
  */
+
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
-  console.log('restaurantsHandler');
+  // Initialize firebase app
   if (!db) {
     await firebase.initializeApp({
       credential: firebase.credential.cert(serviceAccount),
       databaseURL: "https://hack-the-6ix-201-1535217409242.firebaseio.com/"
     });
     db = await firebase.database()
-
-
-
-    let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
-
-    //Test firebase
-    let ref = db.ref("restaurants/");
-    let snapshot = await ref.once("value");
-
-    let dataJSON = snapshot.val();
-    let restaurants = Object.keys(dataJSON).map((word) => " " + word);
-    console.log(restaurants);
-
-    return send(
-      receiver,
-      sender,
-      `The available restaurants is ${restaurants}`
-    )
-
   }
+
+  // Parse message into usable elements
+  let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+
+  // Query Firebase
+  let ref = db.ref("restaurants/");
+  let snapshot = await ref.once("value");
+
+  let dataJSON = snapshot.val();
+  let restaurants = Object.keys(dataJSON).map((word) => " " + word);
+  console.log(restaurants);
+
+  return send(
+    receiver,
+    sender,
+    `The available restaurants is${restaurants}`
+  );
 }
