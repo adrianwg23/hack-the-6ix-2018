@@ -45,19 +45,26 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   let tableForFour = '';
   let tableForEight = '';
 
-  for (const key of Object.keys(reservations['table_4'])) {
-    tableForFour += "\n" + key + ": " + reservations['table_4'][key];
+  if (reservations['table_4'] == 'None' && reservations['table_8'] == 'None') {
+    return send(
+      receiver,
+      sender,
+      `There are no available reservations times for booking at ${restuarantName}`
+    )
   }
-  for (const key of Object.keys(reservations['table_8'])) {
-    tableForEight += "\n" + key + ": " + reservations['table_8'][key];
+  else {
+    for (const key of Object.keys(reservations['table_4'])) {
+      tableForFour += "\n" + key + ": " + reservations['table_4'][key];
+    }
+    for (const key of Object.keys(reservations['table_8'])) {
+      tableForEight += "\n" + key + ": " + reservations['table_8'][key];
+    }
+
+    return send(
+      receiver,
+      sender,
+      `Available reservation times for today are:\nTable for 4: ${tableForFour} \n\nTable for 8: ${tableForEight}`
+    )
   }
 
-  console.log(tableForFour);
-  console.log(tableForEight);
-
-  return send(
-    receiver,
-    sender,
-    `Available reservation times for today are:\nTable for 4: ${tableForFour} \n\nTable for 8: ${tableForEight}`
-  )
 }

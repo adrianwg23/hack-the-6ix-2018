@@ -41,8 +41,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
     restaurants += "\n" + key;
   }
 
-  console.log(restaurants);
-
   return send(
     receiver,
     sender,

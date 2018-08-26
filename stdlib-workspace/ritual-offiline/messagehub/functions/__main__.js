@@ -33,9 +33,6 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
     handler = null;
   }
 
-  console.log(parsedMessage);
-  console.log(handler);
-
   try {
     result = await lib[`${context.service.identifier}.messaging.${handler}`]({
       sender: sender,
