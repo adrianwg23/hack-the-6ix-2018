@@ -27,20 +27,31 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   }
   // Parse message into usable elements
   let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+  if (parsedMessage.length == 1) {
+    return send(
+      receiver,
+      sender,
+      `Please specify a <restaurant_name> after the command <details>`
+    )
+  }
+
+  let restuarantName = parsedMessage[1];
 
   // Query Firebase
-  let ref = db.ref("restaurants/");
+  let ref = db.ref("restaurants/" + restuarantName);
   let snapshot = await ref.once("value");
 
   let dataJSON = snapshot.val();
-  let restaurants = Object.keys(dataJSON).map((word) => " " + word);
+  let location = dataJSON['location'];
+  let waitTime = dataJSON['wait_time'];
+  let hoursOfOperation = `Monday:${dataJSON['hours']['Monday']}\nTuesday:${dataJSON['hours']['Tuesday']}\nWednesday:${dataJSON['hours']['Wednesday']}\nThursday:${dataJSON['hours']['Thursday']}\nFriday:${dataJSON['hours']['Friday']}\nSaturday:${dataJSON['hours']['Saturday']}\nSunday:${dataJSON['hours']['Sunday']}`;
 
 
   return send(
     receiver,
     sender,
-    `This is the DETAILS handler for your MessageBird SMS handler on StdLib` +
-    `\n\n` +
-    `You can customize its behavior in /functions/messaging/more.js`
+    `${restuarantName} is located in "${location}"
+    \nThe wait time for seating is approximately "${waitTime}"
+    \nThe hours of operation is:\n"${hoursOfOperation}"`
   )
 }

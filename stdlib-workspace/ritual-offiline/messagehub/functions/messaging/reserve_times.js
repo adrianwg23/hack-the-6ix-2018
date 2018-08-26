@@ -1,5 +1,9 @@
 const lib = require('lib')({ token: process.env.STDLIB_TOKEN })
-const send = require('../../helpers/send.js')
+const send = require('../../helpers/send.js');
+const firebase = require("firebase-admin");
+const serviceAccount = require("../../serviceAccountKey.json");
+
+let db = null;
 
 /**
 * MORE handler, responds if user texts "more"
@@ -11,12 +15,49 @@ const send = require('../../helpers/send.js')
 * @returns {any}
 */
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
+  // Initialize firebase app
+  if (!db) {
+    await firebase.initializeApp({
+      credential: firebase.credential.cert(serviceAccount),
+      databaseURL: "https://hack-the-6ix-201-1535217409242.firebaseio.com/"
+    });
+    db = await firebase.database()
+  }
+
+  // Parse message into usable elements
   let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+  if (parsedMessage.length == 1) {
+    return send(
+      receiver,
+      sender,
+      `Please specify a <restaurant_name> after the command <details>`
+    )
+  }
+
+  let restuarantName = parsedMessage[1];
+
+  // Query Firebase
+  let ref = db.ref("restaurants/" + restuarantName);
+  let snapshot = await ref.once("value");
+
+  let dataJSON = snapshot.val();
+  let reservations = dataJSON['reservations'];
+  let tableForFour = '';
+  let tableForEight = '';
+
+  for (const key of Object.keys(reservations['table_4'])) {
+    tableForFour += "\n" + key + ": " + reservations['table_4'][key];
+  }
+  for (const key of Object.keys(reservations['table_8'])) {
+    tableForEight += "\n" + key + ": " + reservations['table_8'][key];
+  }
+
+  console.log(tableForFour);
+  console.log(tableForEight);
+
   return send(
     receiver,
     sender,
-    `This is the RESERVE_TIMES handler for your MessageBird SMS handler on StdLib` +
-      `\n\n` +
-      `You can customize its behavior in /functions/messaging/more.js`
+    `Available reservation times for today are:\nTable for 4: ${tableForFour} \n\nTable for 8: ${tableForEight}`
   )
 }
