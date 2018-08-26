@@ -30,7 +30,7 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
     return send(
       receiver,
       sender,
-      `Please specify a <restaurant_name> after the command <details>`
+      `Please specify a <restaurant_name> after the command <reserve_times>`
     )
   }
 

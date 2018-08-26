@@ -5,6 +5,7 @@
   "author": "ritual-offiline <etang_40@hotmail.com>",
   "main": "functions/__main__.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "es6-promise": "^4.2.4",
     "firebase-admin": "^6.0.0",
