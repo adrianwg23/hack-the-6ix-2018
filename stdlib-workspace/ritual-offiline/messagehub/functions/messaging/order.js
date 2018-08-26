@@ -67,7 +67,7 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
       order: menu_item
     }
 
-    let res = await axios.post(' https://4c75ab65.ngrok.io/send_order', data)
+    let res = await axios.post('https://5bbee879.ngrok.io/send_order', data)
     console.log(res.data);
 
     return send(
