@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantItemViewHolder> {
 
     private List<RestaurantItem> mRestaurantList;
+    private InteractionListener mListInteractionListener;
+
 
     public RestaurantAdapter() {
         mRestaurantList = new ArrayList<>();
@@ -35,13 +37,27 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantItemViewHolder holder, int position) {
-        RestaurantItem restaurantItem = ;
+        RestaurantItem restaurantItem = mRestaurantList.get(position);
+
+        String restaurantName = restaurantItem.getRestaurantName();
+
+        holder.mRestaurantNameTv.setText(restaurantName);
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mRestaurantList.size();
+    }
+
+    public void setList(List<RestaurantItem>)
+
+    public interface InteractionListener {
+        void onListClick(int restaurantId);
+    }
+
+    public void setListInteractionListener(InteractionListener interactionListener) {
+        mListInteractionListener = interactionListener;
     }
 
     public class RestaurantItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -55,7 +71,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         @Override
         public void onClick(View v) {
-
+            if (mListInteractionListener != null) {
+                mListInteractionListener.onListClick(getAdapterPosition());
+            }
         }
     }
 }

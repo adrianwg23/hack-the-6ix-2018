@@ -4,6 +4,7 @@ import com.example.adrianwong.yum.datamodel.RestaurantItem;
 import com.example.adrianwong.yum.ui.base.BasePresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantPresenter extends BasePresenter<RestaurantContract.RestaurantView> {
 
@@ -13,8 +14,8 @@ public class RestaurantPresenter extends BasePresenter<RestaurantContract.Restau
         interactor = new RestaurantInteractor(this);
     }
 
-    public void refreshRestaurantList(ArrayList<RestaurantItem> restaurantItems) {
-
+    public void refreshRestaurantList(List<RestaurantItem> restaurantItems) {
+        mView.refreshRestaurantList(restaurantItems);
     }
 
 }

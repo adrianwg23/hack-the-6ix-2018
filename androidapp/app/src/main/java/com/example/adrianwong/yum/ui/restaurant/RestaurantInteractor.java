@@ -38,7 +38,7 @@ public class RestaurantInteractor {
                     mCurrentRestaurantList.add(new RestaurantItem(name));
                 }
 
-
+                restaurantPresenter.refreshRestaurantList(mCurrentRestaurantList);
             }
 
             @Override
