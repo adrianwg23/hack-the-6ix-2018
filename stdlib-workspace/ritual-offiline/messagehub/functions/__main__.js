@@ -1,16 +1,9 @@
 // Import packages
 const lib = require('lib')({token: process.env.STDLIB_TOKEN});
-const firebase = require("firebase-admin");
-const serviceAccount = require("../serviceAccountKey.json");
+
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-
-// Initialize imports
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://hack-the-6ix-201-1535217409242.firebaseio.com/"
-})
 
 /**
  * Generic MessageBird SMS handler
@@ -22,6 +15,7 @@ firebase.initializeApp({
  */
 
 module.exports = async (sender = '', receiver = '', message = '_', createdDatetime = '', context) => {
+
   // Break down the message to the command_message
   let parsedMessage = message.split(" ").map((word) => word.trim());
   let validMessage = true;
@@ -43,12 +37,12 @@ module.exports = async (sender = '', receiver = '', message = '_', createdDateti
   console.log(handler);
 
 
-  // Test firebase
-  let db = firebase.database()
-  let ref = db.ref("restaurants");
-  await ref.once("value", (snapshot) => {
-    console.log(snapshot.val());
-  });
+  // // Test firebase
+  // let db = firebase.database()
+  // let ref = db.ref("restaurants/Pho Metro");
+  // await ref.once("value", (snapshot) => {
+  //   // console.log(snapshot.val());
+  // });
 
   // let response = await fetch('http://api.open-notify.org/iss-now.json')
   //   .then(resp => {
