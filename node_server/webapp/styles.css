@@ -20,6 +20,12 @@ html, body {
   padding: 0;
 }
 
+.left-text {
+  padding-left: 20px;
+}
+.bottom-left-text {
+  padding-left: 60px;
+}
 .large-gap {
   width: 100%;
   height: 50px;
