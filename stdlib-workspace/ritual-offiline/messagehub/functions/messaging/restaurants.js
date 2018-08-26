@@ -35,12 +35,17 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   let snapshot = await ref.once("value");
 
   let dataJSON = snapshot.val();
-  let restaurants = Object.keys(dataJSON).map((word) => " " + word);
+  let restaurants = ''
+
+  for (const key of Object.keys(dataJSON)) {
+    restaurants += "\n" + key;
+  }
+
   console.log(restaurants);
 
   return send(
     receiver,
     sender,
-    `The available restaurants is${restaurants}`
+    `The available restaurants are: \n ${restaurants}`
   );
 }

@@ -44,10 +44,10 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   let snapshot = await ref.once("value");
 
   let dataJSON = snapshot.val();
-  let menu = [];
+  let menu = '';
 
   for (const key of Object.keys(dataJSON)) {
-    menu.push("\n" + key + ":     " + dataJSON[key]);
+    menu += "\n" + key + ": $" + dataJSON[key];
   }
 
   console.log(menu);
@@ -55,6 +55,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   return send(
     receiver,
     sender,
-    `The menu for this restaurant is ${menu}`
+    `The menu for ${parsedMessage[1]} is: \n ${menu}`
   );
 }
