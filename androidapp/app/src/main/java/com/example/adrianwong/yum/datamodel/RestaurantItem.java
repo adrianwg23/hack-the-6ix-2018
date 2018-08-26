@@ -5,8 +5,6 @@ import java.util.List;
 public class RestaurantItem {
 
     private String restaurantName;
-    private List<MenuObject> menuObjectList;
-
 
 
     public RestaurantItem(String restaurantName) {
@@ -17,8 +15,5 @@ public class RestaurantItem {
         return restaurantName;
     }
 
-    public List<MenuObject> getMenuObjectList() {
-        return menuObjectList;
-    }
 }
 
