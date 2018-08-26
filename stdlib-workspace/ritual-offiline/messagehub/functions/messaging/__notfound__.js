@@ -17,6 +17,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
       receiver,
       sender,
       `You have entered a invalid command/response. Please use the symbol # followed by the keyword
-      command. Follow the order: #<command> #<restaurant>`
+      command. Follow the order: #<command> #<param>`
     )
 }

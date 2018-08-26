@@ -23,26 +23,31 @@ firebase.initializeApp({
 
 module.exports = async (sender = '', receiver = '', message = '_', createdDatetime = '', context) => {
   // Break down the message to the command_message
-  let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+  let parsedMessage = message.split(" ").map((word) => word.trim());
+  let validMessage = true;
+  let handler;
+
+  for (let command of parsedMessage) {
+    if (command.charAt(0) != "#") {
+      validMessage = false;
+      break;
+    }
+  }
+  if (validMessage) {
+    handler = parsedMessage[0].replace("#", "");
+  } else {
+    handler = null;
+  }
+
   console.log(parsedMessage);
+  console.log(handler);
 
 
-  // Find which handler to route to
-
-
-
-  let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_';
-  // console.log(handler);
-  // let command_message = false;
-  //
-  // if (handler.charAt(0) == '#') {
-  //   command_message = true;
-  // }
-
-
-  firebase.database().ref('restaurants').set({
-    restaurant_name: "new restaurant",
-    location: "markham"
+  // Test firebase
+  let db = firebase.database()
+  let ref = db.ref("restaurants");
+  await ref.once("value", (snapshot) => {
+    console.log(snapshot.val());
   });
 
   // let response = await fetch('http://api.open-notify.org/iss-now.json')

@@ -11,6 +11,8 @@ const send = require('../../helpers/send.js')
 * @returns {any}
 */
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
+  let parsedMessage = message.split(" #").map((word) => word.trim().replace("#", ""));
+  console.log(parsedMessage);
   return send(
     receiver,
     sender,
