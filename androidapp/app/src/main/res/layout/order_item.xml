@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:layout_height="?attr/listPreferredItemHeight"
+    android:gravity="center_vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_phone_number"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="6479699893"/>
+
+        <TextView
+            android:id="@+id/tv_restaurant"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="pho metro"/>
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="pho dac biet"/>
+    </LinearLayout>
+
+</LinearLayout>
